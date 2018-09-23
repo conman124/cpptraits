@@ -1,3 +1,5 @@
+#pragma once
+
 #include "cat.hpp"
 #include "dog.hpp"
 #include "traits.hpp"
