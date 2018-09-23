@@ -1,3 +1,5 @@
+CXXFLAGS = -std=c++11
+
 objects = main.o catdog.o
 
 traits : $(objects)

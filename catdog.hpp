@@ -1,7 +1,8 @@
 #include "cat.hpp"
 #include "dog.hpp"
+#include "traits.hpp"
 
-class Catdog : public Cat, public Dog {
+class Catdog : public Traits<Cat, Dog> {
     public:
     void speak();
     void meow();
