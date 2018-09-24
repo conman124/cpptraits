@@ -11,7 +11,12 @@ template <class... Extras> class Traits {
     }
 
     template <class U> U* as() {
-        throw std::logic_error("Got to base case of Traits#as before realizing trait isn't implemented...");
+        throw std::logic_error("Called base case of Traits#as...");
+    }
+
+    protected:
+    template <class U> U* as_unsafe() {
+        throw std::logic_error("Got to base case of Traits#as_unsafe before realizing trait isn't implemented...");
     }
 };
 
@@ -30,10 +35,15 @@ template <class T, class... Extras > class Traits<T, Extras...> : public T, publ
             throw std::logic_error("Traits#as called with unimplemented trait");
         }
 
+        return as_unsafe<U>();
+    }
+
+    protected:
+    template <class U> U* as_unsafe() {
         if(std::is_same<T, U>::value) {
             return (U*)this;
         } else {
-            return Traits<Extras...>::template as<U>();
+            return Traits<Extras...>::template as_unsafe<U>();
         }
     }
 };
